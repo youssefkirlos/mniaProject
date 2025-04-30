@@ -16,8 +16,9 @@ public class App
         //Evironnement env = new Evironnement(new SimpleRunner()) ;
 
         //System.out.println(env.getState().eval("res"));
+        //System.out.println(env.getState());
         //System.out.println(env.getActions().toString());
-
+        
         System.exit(0);
     }    
 }
