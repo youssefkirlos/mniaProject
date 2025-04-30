@@ -79,12 +79,12 @@ public class EGreedy implements BanditAlgorithm{
 		counter.put(action, counter.get(action) + 1);
 
         double reward = getReward(action);
-            
+        System.out.println("Action choisie: "+aId);
+		System.out.println("Récompense reçue: "+reward);
         values.put(action, values.get(action) + alpha * (reward + gamma * 0 - values.get(action)));
         
 		System.out.println("Values= "+values);
 		System.out.println("Counter= "+counter);
-		System.out.println("Action choisie: "+aId);
 		
 		return aId;
     }

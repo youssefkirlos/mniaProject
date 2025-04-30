@@ -90,7 +90,8 @@ public class UpperConfidenceBound implements BanditAlgorithm{
 		}
 		
 		double reward = getReward(action);
-		
+		System.out.println("Action choisie: "+aId);
+		System.out.println("Récompense reçue: "+reward);
 		counter.put(action, counter.get(action) + 1);
         totalCounts++; 
         
@@ -100,7 +101,6 @@ public class UpperConfidenceBound implements BanditAlgorithm{
         
         System.out.println("Values = "+values);
 		System.out.println("Counter = "+counter);
-		System.out.println("Action choisie: "+aId);
 		
 		
         
