@@ -10,14 +10,33 @@ public class SimpleRunner extends Runner{
      */
 	
 	private BanditAlgorithm bandit; 
+	private int iter;
 	
-    public SimpleRunner() throws Exception{
+	//Parametres:
+	private double epsilon = 0.2;
+	private double alpha = 0.1;
+	private double gamma = 0.9;
+	private double poidExploration = 1.5;
+	private int nbActions = 3;
+	
+	
+	
+    public SimpleRunner(int algo,int iters) throws Exception{
         super("/Simple/SimpleRL.mch") ;
-        this.initialise(); ; 
+        this.initialise(); ;
         
-        //bandit = new EGreedy(0.2,0.1,0.9,10, getInitialState());
-        //bandit = new UpperConfidenceBound(1.5,10,getInitialState());
-        bandit = new BanditGradient(3,0.1,10, getInitialState());
+        if (algo==1) {
+        	bandit = new EGreedy(epsilon,alpha,gamma,iters, getInitialState());
+        }else if (algo==2) {
+        	bandit = new UpperConfidenceBound(poidExploration,iters,getInitialState());
+    	}else if (algo==3) {
+    		bandit = new BanditGradient(nbActions,alpha,iters, getInitialState());
+    	}else {
+    		System.out.println("ERREUR");
+    	}
+        this.iter = iters;
+        
+        
     } 
 
     /*
@@ -28,7 +47,7 @@ public class SimpleRunner extends Runner{
     public void execSequence() throws Exception {   
     	
     	String action;
-    	for(int i=0;i<100;i++) {
+    	for(int i=0;i<iter;i++) {
     		System.out.println("Iteration = "+(i+1));
     		action = bandit.exec();
     		

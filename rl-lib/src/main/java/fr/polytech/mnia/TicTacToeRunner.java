@@ -1,5 +1,7 @@
 package fr.polytech.mnia;
 
+import de.prob.statespace.Transition;
+
 public class TicTacToeRunner extends Runner{
     /*
      * Le constructeur lance ProB sur la machine tictac.mch
@@ -16,7 +18,11 @@ public class TicTacToeRunner extends Runner{
      * prettyPrintTicTacToe. Cette dernière lit l'état de la machine B
      * et l'affiche de manière plus jolie et compréhensible
      */
+    
+    
     public void execSequence() throws Exception {
+    	
+    
         String win1, win0 ;
         win1 = state.eval("win(1)").toString() ;
         win0 = state.eval("win(0)").toString() ;
@@ -27,6 +33,17 @@ public class TicTacToeRunner extends Runner{
                 & state.getOutTransitions().size() != 0
         ) {
 			state = state.anyOperation(null).explore();
+			
+			animator.printActions(state.getOutTransitions()) ;
+			animator.printState(state) ;
+			System.out.println("Hell: "+state);
+			
+			for(Transition tans: state.getOutTransitions() ) {
+				System.out.println(tans.getParameterPredicate());
+			}
+			
+	
+			
             win1 = state.eval("win(1)").toString() ;
             win0 = state.eval("win(0)").toString() ;
             this.prettyPrintTicTacToe() ;
@@ -34,8 +51,9 @@ public class TicTacToeRunner extends Runner{
             System.out.println("\nwin(1) " + win1);
             System.out.println("win(0) " + win0 + "\n");
 		}
+	
     }
-
+	
     private void prettyPrintTicTacToe(){
         String input = state.eval("square").toString() ;
 
